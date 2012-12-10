@@ -14,7 +14,7 @@ class Instagram {
 		if (!empty($clientId)) {
 			$this->clientId = $clientId;
 		} else {
-			throw new Exception("Impossibile impostare un client-id vuoto");
+			throw new Exception("Client ID must be set");
 		}
 	}
 	
@@ -22,20 +22,20 @@ class Instagram {
 		if (!empty($clientSecret)) {
 			$this->clientSecret = $clientSecret;
 		} else {
-			throw new Exception("Impossibile impostare un client-secret vuoto");
+			throw new Exception("Client Secret must be set");
 		}
 	}
 	
 	//Costruttore
 	public function __construct( $searchType, $searchArray, $blacklist = NULL, $clientId = NULL, $clientSecret = NULL){
 		if (!in_array($searchType, $this->allowedSearchTypes)) {
-			throw new Exception("E' obbligatorio impostare una tipologia di campo di ricerca valida.");
+			throw new Exception("$searchType is mandatory field");
 		}
 		if (!is_array($searchArray) || !count($searchArray)) {
-			throw new Exception("Parametro array di ricerca non impostato correttamente o vuoto.");
+			throw new Exception("$searchArray is mandatory fiel");
 		}
 		if (!is_array($blacklist)) {
-			throw new Exception("Il parametro blacklist deve essere un array");
+			throw new Exception("BlackList must be an array");
 		}
 		
 		$this->searchType	= $searchType;
@@ -61,7 +61,7 @@ class Instagram {
 		}
 		$dataStream = file_get_contents( $url );
 		if ($dataStream === FALSE) {
-			throw new Exception("Non è stato possibile effettuare il retrieve remoto dell'URL: " . $url . " - verificare i requisiti di sistema per la funzione file_get_contents");
+			throw new Exception("Cannot get information from url " . $url . " - check system requirements for file_get_contents");
 		}
 		$content = json_decode( $dataStream );
 		
