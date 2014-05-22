@@ -10,5 +10,5 @@ $instagram->getAllImages( true );
 foreach ( $instagram->list as $item ){
 	var_dump($item);
 }
-
+die;
 ?>
